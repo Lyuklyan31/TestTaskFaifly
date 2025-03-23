@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <FileRef
+      location = "container:TestTaskFaifly.xcodeproj">
+   </FileRef>
+   <Group
+      location = "container:../Packages"
+      name = "Packages">
+      <Group
+         location = "group:Clients"
+         name = "Clients">
+         <FileRef
+            location = "group:NetworkClient">
+         </FileRef>
+      </Group>
+      <Group
+         location = "group:Core"
+         name = "Core">
+         <FileRef
+            location = "group:Shared">
+         </FileRef>
+      </Group>
+      <Group
+         location = "group:Components"
+         name = "Components">
+      </Group>
+      <Group
+         location = "group:Flows"
+         name = "Flows">
+      </Group>
+   </Group>
+</Workspace>
