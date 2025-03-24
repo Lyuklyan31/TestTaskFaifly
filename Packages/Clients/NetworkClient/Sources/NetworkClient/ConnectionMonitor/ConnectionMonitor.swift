@@ -9,7 +9,7 @@ import Foundation
 import Network
 import Combine
 
-final class ConnectionMonitor: @unchecked Sendable {
+final class ConnectionMonitor {
     
     typealias State = NetworkClientState.ConnectionStatus
     

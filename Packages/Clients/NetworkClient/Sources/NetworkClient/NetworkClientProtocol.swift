@@ -19,6 +19,7 @@ public protocol NetworkClientProtocol: ClientProtocol {
 }
 
 public enum NetworkClientError: LocalizedError {
+    case requestFailed(Error)
     case failedToBuildRequest
     case failedToSendRequest
     case failedToFetchData

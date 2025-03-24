@@ -44,14 +44,11 @@ extension Route {
         case .plain:
             return request
         case .query(let queryItems):
-            let dict: [String: Any] = queryItems.reduce([:]) { dictionary, item in
-                var result = dictionary
+            let dict: [String: Any] = queryItems.reduce(into: [:]) { (result, item) in
                 result[item.name] = item.value
-                return result
             }
             
             let parameterEncoding = URLEncoding(destination: .queryString)
-            
             return try parameterEncoding.encode(request, with: dict)
         }
     }
@@ -61,13 +58,7 @@ extension Route {
             throw NetworkClientError.failedToBuildRequest
         }
         
-        let existingPath = urlComponents.path
-        
-        if existingPath.hasSuffix("/") {
-            urlComponents.path = existingPath + endpoint
-        } else {
-            urlComponents.path = existingPath + "/" + endpoint
-        }
+        urlComponents.path += urlComponents.path.hasSuffix("/") ? endpoint : "/\(endpoint)"
         
         guard let finalURL = urlComponents.url else {
             throw NetworkClientError.failedToBuildRequest

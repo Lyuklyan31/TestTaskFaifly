@@ -32,17 +32,17 @@ public class NetworkClient: NetworkClientProtocol {
         self.valueSubject = .init(state)
     }
     
-//    @discardableResult
-//    public func send<T: Decodable>(route: Route, responseType: T.Type) async -> Result<T, NetworkClientError> {
-//        do {
-//            let result = try await dataRequest(for: route)
-//                .serializingDecodable(T.self, decoder: decoder)
-//                .value
-//            return .success(result)
-//        } catch {
-//            return .failure(.failedToBuildRequest)
-//        }
-//    }
+    @discardableResult
+    public func send<T: Decodable>(route: Route, responseType: T.Type) async -> Result<T, NetworkClientError> {
+        do {
+            let result = try await dataRequest(for: route)
+                .serializingDecodable(T.self, decoder: decoder)
+                .value
+            return .success(result)
+        } catch {
+            return .failure(.requestFailed(error))
+        }
+    }
 
     
     // MARK: - Private api
