@@ -25,28 +25,35 @@ class ListViewModel: ViewModelProtocol {
     @Injected(\.peopleClient) var peopleClient
     
     private var bag: Set<AnyCancellable> = .init()
+    private var isLoading = false
     
     init() {
-        
         self.state = .init(
-            listPeople: []
+            listPeople: [],
+            page: 1
         )
-        
-        peopleClient.publisher
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] peopleData in
-                guard let self = self else { return }
-                self.state.listPeople = peopleData.data
-            }
-            .store(in: &bag)
+        loadPeople()
     }
     
     func send(_ actions: ListView.Action) {
         switch actions {
         case .loadPage:
-            Task {
-                let result = try await peopleClient.getListPeople(page: 1)
-                print(result)
+            loadPeople()
+        }
+    }
+    
+    func loadPeople() {
+        guard !isLoading else { return }
+        isLoading = true
+        
+        Task {
+            let peopleData = try await peopleClient.getListPeople(page: state.page)
+            
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
+                self.state.listPeople.append(contentsOf: peopleData.data)
+                self.state.page += 1
+                self.isLoading = false
             }
         }
     }

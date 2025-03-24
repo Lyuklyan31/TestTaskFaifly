@@ -17,19 +17,22 @@ public struct CreatePeopleData: Equatable {
     public var total: Total
     public var totalPages: TotalPages
     public var data: [PersonData]
+    public var support: SupportData
     
     public init(
         page: Page = .init(1),
         perPage: ParPage = .init(6),
         total: Total = .init(2),
         totalPages: TotalPages = .init(6),
-        data: [PersonData] = .init()
+        data: [PersonData] = .init(),
+        support: SupportData = .init()
     ) {
         self.page = page
         self.perPage = perPage
         self.total = total
         self.totalPages = totalPages
         self.data = data
+        self.support = support
     }
 }
 

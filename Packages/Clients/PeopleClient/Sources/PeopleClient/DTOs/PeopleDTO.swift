@@ -15,6 +15,7 @@ struct PeopleDTO: Codable {
     let total: Int
     let totalPages: Int
     let data: [PersonDataDTO]
+    let support: SupportDTO
 }
 
 extension PeopleDTO {
@@ -25,6 +26,7 @@ extension PeopleDTO {
         case total
         case totalPages = "total_pages"
         case data
+        case support
     }
 }
 
@@ -36,7 +38,8 @@ extension CreatePeopleData {
             perPage: .init(dto.perPage),
             total: .init(dto.total),
             totalPages: .init(dto.totalPages),
-            data: dto.data.map { PersonData(dto: $0) }
+            data: dto.data.map { PersonData(dto: $0) },
+            support: .init(dto: dto.support)
         )
     }
 }

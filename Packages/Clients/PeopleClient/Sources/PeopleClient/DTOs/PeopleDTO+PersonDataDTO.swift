@@ -25,8 +25,8 @@ extension PeopleDTO.PersonDataDTO {
     enum CodingKeys: String, CodingKey {
         case id
         case email
-        case firstName = "first_Name"
-        case lastName = "last_Name"
+        case firstName = "first_name"
+        case lastName = "last_name"
         case avatar
     }
 }

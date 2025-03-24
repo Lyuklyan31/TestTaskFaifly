@@ -14,7 +14,7 @@ let package = Package(
     ],
     dependencies: [
         .package(name: "Shared", path: "../../Core/Shared"),
-        .package(name: "UIComponents", path: "../../UIComponents"),
+        .package(name: "UIComponents", path: "../../Components/UIComponents"),
         .package(name: "PeopleClient", path: "../../Clients/PeopleClient"),
         .package(name: "Extensions", path: "../../Core/Extensions")
         ],

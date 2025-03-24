@@ -5,7 +5,6 @@ import UIKit
 public enum HomeTabRoute: Route {
     case list
     case favorite
-    case unFavorite
 }
 
 public class HomeCoordinator: TabBarCoordinator<HomeTabRoute> {
@@ -14,25 +13,21 @@ public class HomeCoordinator: TabBarCoordinator<HomeTabRoute> {
     
     private let listCoordinator: Presentable
     private let favoriteCoordinator: Presentable
-    private let unFavoriteCoordinator: Presentable
     
     public init(initialRoute: HomeTabRoute) {
         self.listCoordinator = Self.preparePresentable(for: .list)
         self.favoriteCoordinator = Self.preparePresentable(for: .favorite)
-        self.unFavoriteCoordinator = Self.preparePresentable(for: .unFavorite)
         
         let initialSelectedTab: Presentable
         switch initialRoute {
         case .list: initialSelectedTab = listCoordinator
         case .favorite: initialSelectedTab = favoriteCoordinator
-        case .unFavorite: initialSelectedTab = unFavoriteCoordinator
         }
         
         super.init(
             tabs: [
                 listCoordinator,
-                favoriteCoordinator,
-                unFavoriteCoordinator
+                favoriteCoordinator
             ],
             select: initialSelectedTab
         )
@@ -49,8 +44,6 @@ public class HomeCoordinator: TabBarCoordinator<HomeTabRoute> {
             return .select(listCoordinator)
         case .favorite:
             return .select(favoriteCoordinator)
-        case .unFavorite:
-            return .select(unFavoriteCoordinator)
         }
     }
     
@@ -83,11 +76,6 @@ public class HomeCoordinator: TabBarCoordinator<HomeTabRoute> {
             image: UIImage(systemName: "star.fill"),
             selectedImage: UIImage(systemName: "star.fill")
         )
-        unFavoriteCoordinator.viewController.tabBarItem = .init(
-            title: "Un Favorite",
-            image: UIImage(systemName: "star"),
-            selectedImage: UIImage(systemName: "star")
-        )
     }
     
     static private func preparePresentable(for route: HomeTabRoute) -> Presentable {
@@ -96,11 +84,6 @@ public class HomeCoordinator: TabBarCoordinator<HomeTabRoute> {
         case .list:
             return ListFlowCoordinator(rootViewController: navigationController)
         case .favorite:
-            let viewController = UIViewController()
-            viewController.view.backgroundColor = .blue
-            navigationController.viewControllers = [viewController]
-            return navigationController
-        case .unFavorite:
             let viewController = UIViewController()
             viewController.view.backgroundColor = .blue
             navigationController.viewControllers = [viewController]

@@ -9,12 +9,13 @@
 /* Begin PBXBuildFile section */
 		0400127A2D91814F008D9CF3 /* XCoordinator in Frameworks */ = {isa = PBXBuildFile; productRef = 040012792D91814F008D9CF3 /* XCoordinator */; };
 		0400127D2D918160008D9CF3 /* Tagged in Frameworks */ = {isa = PBXBuildFile; productRef = 0400127C2D918160008D9CF3 /* Tagged */; };
-		040012802D91818C008D9CF3 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 0400127F2D91818C008D9CF3 /* Kingfisher */; };
 		040012832D9181AB008D9CF3 /* Factory in Frameworks */ = {isa = PBXBuildFile; productRef = 040012822D9181AB008D9CF3 /* Factory */; };
 		040012862D9181CB008D9CF3 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 040012852D9181CB008D9CF3 /* Alamofire */; };
 		040012882D919B7A008D9CF3 /* HomeFlow in Frameworks */ = {isa = PBXBuildFile; productRef = 040012872D919B7A008D9CF3 /* HomeFlow */; };
 		040012992D91C5CD008D9CF3 /* NetworkClient in Frameworks */ = {isa = PBXBuildFile; productRef = 040012982D91C5CD008D9CF3 /* NetworkClient */; };
 		0400129B2D91C5D3008D9CF3 /* PeopleClient in Frameworks */ = {isa = PBXBuildFile; productRef = 0400129A2D91C5D3008D9CF3 /* PeopleClient */; };
+		040012CD2D91FC9E008D9CF3 /* UIComponents in Frameworks */ = {isa = PBXBuildFile; productRef = 040012CC2D91FC9E008D9CF3 /* UIComponents */; };
+		040012E22D920308008D9CF3 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 040012E12D920308008D9CF3 /* Kingfisher */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,9 +67,10 @@
 				0400129B2D91C5D3008D9CF3 /* PeopleClient in Frameworks */,
 				040012992D91C5CD008D9CF3 /* NetworkClient in Frameworks */,
 				040012862D9181CB008D9CF3 /* Alamofire in Frameworks */,
+				040012E22D920308008D9CF3 /* Kingfisher in Frameworks */,
 				040012882D919B7A008D9CF3 /* HomeFlow in Frameworks */,
-				040012802D91818C008D9CF3 /* Kingfisher in Frameworks */,
 				0400127D2D918160008D9CF3 /* Tagged in Frameworks */,
+				040012CD2D91FC9E008D9CF3 /* UIComponents in Frameworks */,
 				0400127A2D91814F008D9CF3 /* XCoordinator in Frameworks */,
 				040012832D9181AB008D9CF3 /* Factory in Frameworks */,
 			);
@@ -141,12 +143,13 @@
 			packageProductDependencies = (
 				040012792D91814F008D9CF3 /* XCoordinator */,
 				0400127C2D918160008D9CF3 /* Tagged */,
-				0400127F2D91818C008D9CF3 /* Kingfisher */,
 				040012822D9181AB008D9CF3 /* Factory */,
 				040012852D9181CB008D9CF3 /* Alamofire */,
 				040012872D919B7A008D9CF3 /* HomeFlow */,
 				040012982D91C5CD008D9CF3 /* NetworkClient */,
 				0400129A2D91C5D3008D9CF3 /* PeopleClient */,
+				040012CC2D91FC9E008D9CF3 /* UIComponents */,
+				040012E12D920308008D9CF3 /* Kingfisher */,
 			);
 			productName = TestTaskFaifly;
 			productReference = 04863A762D8F051A002A55BD /* TestTaskFaifly.app */;
@@ -233,9 +236,9 @@
 			packageReferences = (
 				040012782D91814F008D9CF3 /* XCRemoteSwiftPackageReference "XCoordinator" */,
 				0400127B2D918160008D9CF3 /* XCRemoteSwiftPackageReference "swift-tagged" */,
-				0400127E2D91818C008D9CF3 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				040012812D9181AB008D9CF3 /* XCRemoteSwiftPackageReference "Factory" */,
 				040012842D9181CB008D9CF3 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				040012E02D920308008D9CF3 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 04863A772D8F051A002A55BD /* Products */;
@@ -622,14 +625,6 @@
 				minimumVersion = 0.10.0;
 			};
 		};
-		0400127E2D91818C008D9CF3 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 8.3.1;
-			};
-		};
 		040012812D9181AB008D9CF3 /* XCRemoteSwiftPackageReference "Factory" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/hmlongco/Factory.git";
@@ -646,6 +641,14 @@
 				minimumVersion = 5.10.2;
 			};
 		};
+		040012E02D920308008D9CF3 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.3.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -658,11 +661,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 0400127B2D918160008D9CF3 /* XCRemoteSwiftPackageReference "swift-tagged" */;
 			productName = Tagged;
-		};
-		0400127F2D91818C008D9CF3 /* Kingfisher */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 0400127E2D91818C008D9CF3 /* XCRemoteSwiftPackageReference "Kingfisher" */;
-			productName = Kingfisher;
 		};
 		040012822D9181AB008D9CF3 /* Factory */ = {
 			isa = XCSwiftPackageProductDependency;
@@ -685,6 +683,15 @@
 		0400129A2D91C5D3008D9CF3 /* PeopleClient */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = PeopleClient;
+		};
+		040012CC2D91FC9E008D9CF3 /* UIComponents */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = UIComponents;
+		};
+		040012E12D920308008D9CF3 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 040012E02D920308008D9CF3 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

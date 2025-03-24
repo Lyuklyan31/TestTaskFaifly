@@ -12,6 +12,7 @@ extension ListView {
     
     struct State {
         var listPeople: [PersonData]
+        var page: Int
     }
 }
 

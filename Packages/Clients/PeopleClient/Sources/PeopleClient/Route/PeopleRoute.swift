@@ -39,7 +39,7 @@ struct PeopleRoute: Route {
     
     var parameters: Parameters {
         let queryItems: [URLQueryItem] = [
-            .init(name: Keys.page.rawValue, value: "1")
+            .init(name: Keys.page.rawValue, value: "\(page.rawValue)")
         ]
         return .query(queryItems)
     }

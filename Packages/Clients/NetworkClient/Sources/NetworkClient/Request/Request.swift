@@ -53,17 +53,11 @@ extension Route {
         }
     }
     
-    private func createRequest() throws -> URLRequest {
-        guard var urlComponents = URLComponents(string: baseURL) else {
+    func createRequest() throws -> URLRequest {
+        guard let url = URL(string: baseURL)?.appendingPathComponent(endpoint) else {
             throw NetworkClientError.failedToBuildRequest
         }
-        
-        urlComponents.path += urlComponents.path.hasSuffix("/") ? endpoint : "/\(endpoint)"
-        
-        guard let finalURL = urlComponents.url else {
-            throw NetworkClientError.failedToBuildRequest
-        }
-        
-        return URLRequest(url: finalURL)
+        return URLRequest(url: url)
     }
 }
+

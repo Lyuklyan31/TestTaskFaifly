@@ -1,5 +1,5 @@
 //
-//  PageTag.swift
+//  PageValue.swift
 //  SharedModels
 //
 //  Created by Oleh Liuklian  on 24.03.2025.

@@ -8,7 +8,7 @@
 import Foundation
 import Tagged
 
-public struct PersonData: Equatable {
+public struct PersonData: Equatable, Identifiable {
     
     public var id: ID
     public var email: Email
