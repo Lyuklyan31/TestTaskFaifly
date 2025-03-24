@@ -19,41 +19,9 @@ public struct Header {
     public let name: Key
     public let value: Value
 
-    // MARK: - Factory methods
-    
-    public static func contentType(_ value: ContentType) -> Self {
-        .init(name: "Content-Type", value: value.value)
-    }
+    // MARK: - Factory method
 
-    public static func acceptType(_ value: AcceptType) -> Self {
-        .init(name: "Accept", value: value.value)
-    }
-}
-
-extension Header {
-    
-    public enum ContentType {
-        case formUrlEncoded
-        case json
-        
-        var value: String {
-            switch self {
-            case .formUrlEncoded:
-                return "application/x-www-form-urlencoded"
-            case .json:
-                return "application/json"
-            }
-        }
-    }
-    
-    public enum AcceptType {
-        case json
-        
-        var value: String {
-            switch self {
-            case .json:
-                return "application/json"
-            }
-        }
+    public static func acceptType() -> Self {
+        .init(name: "Accept", value: "application/json")
     }
 }

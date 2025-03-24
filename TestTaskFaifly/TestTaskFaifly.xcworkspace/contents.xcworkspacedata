@@ -11,6 +11,9 @@
          location = "group:Clients"
          name = "Clients">
          <FileRef
+            location = "group:PeopleClient">
+         </FileRef>
+         <FileRef
             location = "group:NetworkClient">
          </FileRef>
       </Group>

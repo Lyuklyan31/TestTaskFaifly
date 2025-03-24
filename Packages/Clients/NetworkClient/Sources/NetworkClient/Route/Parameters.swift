@@ -11,8 +11,6 @@ public enum Parameters {
     
     case plain
     case query([URLQueryItem])
-    case bodyModel(Encodable)
-    case body(dictionary: [String: Any], encoding: Encoding)
     
     public var queryItems: [URLQueryItem]? {
         guard case .query(let query) = self else {
@@ -30,5 +28,3 @@ extension Parameters {
         case json
     }
 }
-
-

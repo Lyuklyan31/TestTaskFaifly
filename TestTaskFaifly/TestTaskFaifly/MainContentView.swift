@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Alamofire
 
 struct MainContentView: View {
     var body: some View {
@@ -13,7 +14,19 @@ struct MainContentView: View {
             Image(systemName: "globe")
                 .imageScale(.large)
                 .foregroundStyle(.tint)
-            Text("Hello, world!")
+            Button("123456") {
+                AF.request("https://reqres.in/api/users?page={1}")
+                    .validate()
+                    .validate(contentType: ["application/json"])
+                    .responseString { response in
+                        switch response.result {
+                        case .success:
+                            print(response.result)
+                        case let .failure(error):
+                            print(error)
+                        }
+                    }
+            }
         }
         .padding()
     }

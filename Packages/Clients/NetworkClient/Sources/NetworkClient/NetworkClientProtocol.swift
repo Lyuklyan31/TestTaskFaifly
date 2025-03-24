@@ -14,12 +14,21 @@ import Combine
 public protocol NetworkClientProtocol: ClientProtocol {
     var state: NetworkClientState { get }
     var publisher: AnyPublisher<NetworkClientState, Never> { get }
-    
+    @discardableResult
+    func send<T: Decodable>(route: Route, responseType: T.Type) async -> Result<T, NetworkClientError>
+}
+
+public enum NetworkClientError: LocalizedError {
+    case failedToBuildRequest
+    case failedToSendRequest
+    case failedToFetchData
+    case networkUnavailable
+    case invalidResponse
 }
 
 // MARK: - State
 
-public struct NetworkClientState {
+public struct NetworkClientState: Equatable, Hashable, Sendable {
     
     public var connectionStatus: ConnectionStatus
     
@@ -28,32 +37,18 @@ public struct NetworkClientState {
     }
 }
 
-extension NetworkClientState: Equatable { }
-extension NetworkClientState: Hashable { }
-extension NetworkClientState: Sendable { }
-
 extension NetworkClientState {
     
-    public enum ConnectionStatus {
+    public enum ConnectionStatus: Equatable, Hashable, Sendable {
         case connected(ConnectionType)
         case disconnected
     }
 }
 
-extension NetworkClientState.ConnectionStatus: Equatable { }
-extension NetworkClientState.ConnectionStatus: Hashable { }
-extension NetworkClientState.ConnectionStatus: Sendable { }
-
-
 extension NetworkClientState.ConnectionStatus {
     
-    public enum ConnectionType {
+    public enum ConnectionType: Equatable, Hashable, Sendable {
         case cellular
         case wifi
     }
 }
-
-extension NetworkClientState.ConnectionStatus.ConnectionType: Equatable { }
-extension NetworkClientState.ConnectionStatus.ConnectionType: Hashable { }
-extension NetworkClientState.ConnectionStatus.ConnectionType: Sendable { }
-
