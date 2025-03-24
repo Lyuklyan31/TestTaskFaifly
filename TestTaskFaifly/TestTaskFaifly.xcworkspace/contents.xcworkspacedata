@@ -8,6 +8,20 @@
       location = "container:../Packages"
       name = "Packages">
       <Group
+         location = "group:Flows"
+         name = "Flows">
+         <FileRef
+            location = "group:HomeFlow">
+         </FileRef>
+      </Group>
+      <Group
+         location = "group:Components"
+         name = "Components">
+         <FileRef
+            location = "group:UIComponents">
+         </FileRef>
+      </Group>
+      <Group
          location = "group:Clients"
          name = "Clients">
          <FileRef
@@ -21,16 +35,14 @@
          location = "group:Core"
          name = "Core">
          <FileRef
+            location = "group:SharedModels">
+         </FileRef>
+         <FileRef
+            location = "group:Extensions">
+         </FileRef>
+         <FileRef
             location = "group:Shared">
          </FileRef>
-      </Group>
-      <Group
-         location = "group:Components"
-         name = "Components">
-      </Group>
-      <Group
-         location = "group:Flows"
-         name = "Flows">
       </Group>
    </Group>
 </Workspace>

@@ -5,6 +5,7 @@
 //  Created by Oleh Liuklian  on 22.03.2025.
 //
 
+import Factory
 import Shared
 import Foundation
 import Combine
@@ -30,6 +31,14 @@ public class NetworkClient: NetworkClientProtocol {
         
         let state: NetworkClientState = .init(connectionStatus: connectionMonitor.state)
         self.valueSubject = .init(state)
+        
+        connectionMonitor.publisher.sink { [weak self] item in
+            guard let self else { return }
+            var state = self.state
+            state.connectionStatus = item
+            self.valueSubject.send(state)
+        }
+        .store(in: &bag)
     }
     
     @discardableResult
@@ -43,7 +52,6 @@ public class NetworkClient: NetworkClientProtocol {
             return .failure(.requestFailed(error))
         }
     }
-
     
     // MARK: - Private api
     

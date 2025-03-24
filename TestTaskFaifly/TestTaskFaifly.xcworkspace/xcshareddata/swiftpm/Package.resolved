@@ -1,5 +1,4 @@
 {
-  "originHash" : "ec560a9c49d35c9fd4ad62787e11d3b48e347462493438e8d6d0ddd73c39896b",
   "pins" : [
     {
       "identity" : "alamofire",
@@ -29,15 +28,6 @@
       }
     },
     {
-      "identity" : "macaw",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/exyte/Macaw.git",
-      "state" : {
-        "revision" : "29ec199cbc9c814f8ceffc1a33b8775b7349dcdd",
-        "version" : "0.9.10"
-      }
-    },
-    {
       "identity" : "rxswift",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/ReactiveX/RxSwift.git",
@@ -56,15 +46,6 @@
       }
     },
     {
-      "identity" : "swxmlhash",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/drmohundro/SWXMLHash",
-      "state" : {
-        "revision" : "6469881a3f30417c5bb02404ea4b69207f297592",
-        "version" : "6.0.0"
-      }
-    },
-    {
       "identity" : "xcoordinator",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/QuickBirdEng/XCoordinator.git",
@@ -74,5 +55,5 @@
       }
     }
   ],
-  "version" : 3
+  "version" : 2
 }
