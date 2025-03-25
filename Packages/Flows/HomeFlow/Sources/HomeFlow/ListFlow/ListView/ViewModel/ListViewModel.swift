@@ -13,6 +13,8 @@ import PeopleClient
 import Factory
 import Combine
 import Shared
+import UIComponents
+import RealmSwift
 
 class ListViewModel: ViewModelProtocol {
     
@@ -23,15 +25,12 @@ class ListViewModel: ViewModelProtocol {
     
     var router: WeakRouter<ListFlowRoute>?
     
-    @Injected(\.peopleClient) var peopleClient
-           
+    @Injected(\.peopleClient) var peopleClient: any PeopleClientProtocol
+    
     private var bag: Set<AnyCancellable> = .init()
     private var isLoading = false
     
-    private let personRepository: PersonRepository
-    
     init() {
-        
         self.state = .init(
             listPeople: [],
             page: 1,
@@ -51,8 +50,8 @@ class ListViewModel: ViewModelProtocol {
             self.state.selectedPerson = person
             self.state.supportText = peopleClient.state.support.text
             router?.trigger(.person(.init(data: self.state.selectedPerson, support: self.state.supportText)))
-        case .makeFavorite(let person, let newValue): break
-//            updateFavorite(for: person, isFavorite: newValue)
+        case .makeFavorite(let person, let newValue):
+            updatePersonFavoriteStatus(person: person, newValue: newValue)
         }
     }
     
@@ -72,20 +71,30 @@ class ListViewModel: ViewModelProtocol {
         }
     }
     
-//    func updateFavorite(for person: PersonData, isFavorite: Bool) {
-//        if let index = state.listPeople.firstIndex(where: { $0.id == person.id }) {
-//            state.listPeople[index].isFavorite = isFavorite
-//
-////            if let personRealm = realm.object(ofType: PersonRealm.self, forPrimaryKey: person.id.rawValue) {
-////                try! realm.write {
-////                    personRealm.isFavorite = isFavorite
-////                }
-////            } else {
-////                let newPersonRealm = PersonRealm(from: state.listPeople[index])
-////                try! realm.write {
-////                    realm.add(newPersonRealm)
-////                }
-////            }
-//        }
-//    }
+    func updatePersonFavoriteStatus(person: PersonData, newValue: Bool) {
+        let realm = try! Realm()
+        
+        if let index = self.state.listPeople.firstIndex(of: person) {
+            self.state.listPeople[index].isFavorite = newValue
+        }
+        
+        if !newValue {
+            if let personRealm = realm.objects(PersonRealm.self).filter("ownerId == %@", person.id.rawValue).first {
+                try! realm.write {
+                    realm.delete(personRealm)
+                }
+            }
+        } else {
+            if let personRealm = realm.objects(PersonRealm.self).filter("ownerId == %@", person.id.rawValue).first {
+                try! realm.write {
+                    personRealm.isFavorite = newValue
+                }
+            } else {
+                let personRealm = PersonRealm(personData: person)
+                try! realm.write {
+                    realm.add(personRealm)
+                }
+            }
+        }
+    }
 }

@@ -8,14 +8,31 @@
 import SwiftUI
 import XCoordinator
 import HomeFlow
+import RealmSwift
 
 @main
-struct TestTaskFaiflyApp: App {
+struct TestTaskFaiflyApp: SwiftUI.App {
     private let coordinator = HomeCoordinator(initialRoute: .list)
 
+    
+    init() {
+            Realm.Configuration.defaultConfiguration = Realm.Configuration(
+                schemaVersion: 1,
+                migrationBlock: { migration, oldSchemaVersion in
+                    if oldSchemaVersion < 1 {
+                        migration.enumerateObjects(ofType: PersonRealm.className()) { oldObject, newObject in
+                            newObject!["ownerId"] = 0
+                        }
+                    }
+                }
+            )
+        }
+    
     var body: some Scene {
         WindowGroup {
-            CoordinatorView(coordinator: coordinator).ignoresSafeArea()
+            CoordinatorView(coordinator: coordinator)
+                .environment(\.realmConfiguration, Realm.Configuration.defaultConfiguration)
+                .ignoresSafeArea()
         }
     }
 }
@@ -29,7 +46,5 @@ struct CoordinatorView: UIViewControllerRepresentable {
         coordinator.rootViewController
     }
 
-    func updateUIViewController(_ uiViewController: UIViewController, context: Context) {
-        // TODO
-    }
+    func updateUIViewController(_ uiViewController: UIViewController, context: Context) { }
 }

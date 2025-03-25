@@ -84,10 +84,7 @@ public class HomeCoordinator: TabBarCoordinator<HomeTabRoute> {
         case .list:
             return ListFlowCoordinator(rootViewController: navigationController)
         case .favorite:
-            let viewController = UIViewController()
-            viewController.view.backgroundColor = .blue
-            navigationController.viewControllers = [viewController]
-            return navigationController
+            return FavoriteFlowCoordinator(rootViewController: navigationController)
         }
         
     }

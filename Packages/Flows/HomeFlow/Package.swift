@@ -16,8 +16,9 @@ let package = Package(
         .package(name: "Shared", path: "../../Core/Shared"),
         .package(name: "UIComponents", path: "../../Components/UIComponents"),
         .package(name: "PeopleClient", path: "../../Clients/PeopleClient"),
-        .package(name: "Extensions", path: "../../Core/Extensions")
-        ],
+        .package(name: "Extensions", path: "../../Core/Extensions"),
+        .package(url: "https://github.com/realm/realm-swift.git", from: "14.14.0")
+    ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
         // Targets can depend on other targets in this package and products from dependencies.
@@ -27,7 +28,8 @@ let package = Package(
                 .product(name: "Shared", package: "Shared"),
                 .product(name: "UIComponents", package: "UIComponents"),
                 .product(name: "PeopleClient", package: "PeopleClient"),
-                .product(name: "Extensions", package: "Extensions")
+                .product(name: "Extensions", package: "Extensions"),
+                .product(name: "RealmSwift", package: "realm-swift")
             ]
         ),
         .testTarget(
