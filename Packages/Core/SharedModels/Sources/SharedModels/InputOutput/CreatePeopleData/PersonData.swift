@@ -15,19 +15,22 @@ public struct PersonData: Equatable, Identifiable {
     public var firstName: FirstName
     public var lastName: LastName
     public var avatar: Avatar
+    public var isFavorite: Bool
     
     public init(
         id: ID = .init(1),
         email: Email = .init("george.bluth@reqres.in"),
         firstName: FirstName = .init("George"),
         lastName: LastName = .init("Bluth"),
-        avatar: Avatar = .init("https://reqres.in/img/faces/1-image.jpg")
+        avatar: Avatar = .init("https://reqres.in/img/faces/1-image.jpg"),
+        isFavorite: Bool = false
     ) {
         self.id = id
         self.email = email
         self.firstName = firstName
         self.lastName = lastName
         self.avatar = avatar
+        self.isFavorite = isFavorite
     }
 }
 

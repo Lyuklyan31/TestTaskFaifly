@@ -5,14 +5,17 @@
 //  Created by Oleh Liuklian  on 24.03.2025.
 //
 
-import XCoordinator
 import Foundation
-import UIKit
+import XCoordinator
+import UIComponents
 import Extensions
+import UIKit
+import SharedModels
 
 enum ListFlowRoute: Route {
     case root
     case back
+    case person(InputParameters)
 }
 
 final class ListFlowCoordinator: NavigationCoordinator<ListFlowRoute> {
@@ -28,6 +31,7 @@ final class ListFlowCoordinator: NavigationCoordinator<ListFlowRoute> {
         self.listViewModel = ListViewModel()
         let viewController = ListView(viewModel: listViewModel).hostable()
         rootPresentable = viewController
+        
         super.init(rootViewController: rootViewController, initialRoute: .root)
         listViewModel.router = weakRouter
     }
@@ -36,9 +40,28 @@ final class ListFlowCoordinator: NavigationCoordinator<ListFlowRoute> {
         switch route {
         case .root: return .set([rootPresentable])
         case .back: return .pop()
+        case .person:
+            let presentable = personPresentable()
+            return .push(presentable)
         }
     }
+    
+    private func personPresentable() -> Presentable {
+        let viewModel = PersonViewModel(
+            router: weakRouter,
+            inputParameters: .init(
+                data: listViewModel.state.selectedPerson,
+                support: listViewModel.state.supportText
+            )
+        )
+        let viewController = PersonView(viewModel: viewModel).hostable()
+        viewController.hidesBottomBarWhenPushed = true
+        return viewController
+    }
 }
+// MARK: - InputParameters
 
-
-
+struct InputParameters {
+    var data: PersonData
+    var support: String
+}

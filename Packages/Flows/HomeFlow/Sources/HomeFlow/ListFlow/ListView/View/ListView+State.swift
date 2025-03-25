@@ -13,6 +13,10 @@ extension ListView {
     struct State {
         var listPeople: [PersonData]
         var page: Int
+        var selectedPerson: PersonData
+        var supportText: String
+        var title: String
+        var favorite: Bool
     }
 }
 

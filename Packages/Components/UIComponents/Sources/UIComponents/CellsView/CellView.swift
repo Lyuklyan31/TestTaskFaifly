@@ -13,23 +13,46 @@ public struct CellView: View {
     public var image: String
     public var fullName: String
     public var email: String
+    @Binding public var favorite: Bool
      
     public init(
         image: String,
         fullName: String,
-        email: String
+        email: String,
+        favorite: Binding<Bool>
      ) {
          self.image = image
          self.fullName = fullName
          self.email = email
+         self._favorite = favorite
      }
     
     public var body: some View {
         HStack(spacing: 20.0) {
             imageView
             personDataView
+            Spacer()
+            favoriteButton(for: favorite)
         }
         .frame(height: 90)
+    }
+    
+    // MARK: - SubViews
+    
+    private func favoriteButton(for favorite: Bool) -> some View {
+        Button {
+            self.favorite.toggle()
+        } label: {
+            if favorite {
+                Image(systemName: "star.fill")
+                    .foregroundColor(.yellow)
+                    .font(.largeTitle)
+            } else {
+                Image(systemName: "star")
+                    .foregroundColor(.yellow)
+                    .font(.largeTitle)
+            }
+        }
     }
     
     private var imageView: some View {

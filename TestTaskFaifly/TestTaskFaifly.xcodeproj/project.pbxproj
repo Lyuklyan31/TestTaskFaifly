@@ -16,6 +16,11 @@
 		0400129B2D91C5D3008D9CF3 /* PeopleClient in Frameworks */ = {isa = PBXBuildFile; productRef = 0400129A2D91C5D3008D9CF3 /* PeopleClient */; };
 		040012CD2D91FC9E008D9CF3 /* UIComponents in Frameworks */ = {isa = PBXBuildFile; productRef = 040012CC2D91FC9E008D9CF3 /* UIComponents */; };
 		040012E22D920308008D9CF3 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 040012E12D920308008D9CF3 /* Kingfisher */; };
+		0403DE5E2D924324009D3A6B /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 0403DE5D2D924324009D3A6B /* RealmSwift */; };
+		0403DE622D92449D009D3A6B /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 0403DE612D92449D009D3A6B /* RealmSwift */; };
+		0403DE632D92449D009D3A6B /* RealmSwift in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 0403DE612D92449D009D3A6B /* RealmSwift */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		0403DE652D9244A4009D3A6B /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 0403DE642D9244A4009D3A6B /* RealmSwift */; };
+		0403DE662D9244A4009D3A6B /* RealmSwift in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 0403DE642D9244A4009D3A6B /* RealmSwift */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,6 +39,31 @@
 			remoteInfo = TestTaskFaifly;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		0403DE4C2D923BD2009D3A6B /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				0403DE632D92449D009D3A6B /* RealmSwift in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0403DE532D923C6B009D3A6B /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				0403DE662D9244A4009D3A6B /* RealmSwift in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		04863A762D8F051A002A55BD /* TestTaskFaifly.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestTaskFaifly.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -72,6 +102,7 @@
 				0400127D2D918160008D9CF3 /* Tagged in Frameworks */,
 				040012CD2D91FC9E008D9CF3 /* UIComponents in Frameworks */,
 				0400127A2D91814F008D9CF3 /* XCoordinator in Frameworks */,
+				0403DE5E2D924324009D3A6B /* RealmSwift in Frameworks */,
 				040012832D9181AB008D9CF3 /* Factory in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -80,6 +111,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0403DE622D92449D009D3A6B /* RealmSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -87,6 +119,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0403DE652D9244A4009D3A6B /* RealmSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -150,6 +183,7 @@
 				0400129A2D91C5D3008D9CF3 /* PeopleClient */,
 				040012CC2D91FC9E008D9CF3 /* UIComponents */,
 				040012E12D920308008D9CF3 /* Kingfisher */,
+				0403DE5D2D924324009D3A6B /* RealmSwift */,
 			);
 			productName = TestTaskFaifly;
 			productReference = 04863A762D8F051A002A55BD /* TestTaskFaifly.app */;
@@ -162,6 +196,7 @@
 				04863A822D8F051C002A55BD /* Sources */,
 				04863A832D8F051C002A55BD /* Frameworks */,
 				04863A842D8F051C002A55BD /* Resources */,
+				0403DE4C2D923BD2009D3A6B /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -173,6 +208,7 @@
 			);
 			name = TestTaskFaiflyTests;
 			packageProductDependencies = (
+				0403DE612D92449D009D3A6B /* RealmSwift */,
 			);
 			productName = TestTaskFaiflyTests;
 			productReference = 04863A862D8F051C002A55BD /* TestTaskFaiflyTests.xctest */;
@@ -185,6 +221,7 @@
 				04863A8C2D8F051C002A55BD /* Sources */,
 				04863A8D2D8F051C002A55BD /* Frameworks */,
 				04863A8E2D8F051C002A55BD /* Resources */,
+				0403DE532D923C6B009D3A6B /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -196,6 +233,7 @@
 			);
 			name = TestTaskFaiflyUITests;
 			packageProductDependencies = (
+				0403DE642D9244A4009D3A6B /* RealmSwift */,
 			);
 			productName = TestTaskFaiflyUITests;
 			productReference = 04863A902D8F051C002A55BD /* TestTaskFaiflyUITests.xctest */;
@@ -239,6 +277,7 @@
 				040012812D9181AB008D9CF3 /* XCRemoteSwiftPackageReference "Factory" */,
 				040012842D9181CB008D9CF3 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				040012E02D920308008D9CF3 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				0403DE5C2D924324009D3A6B /* XCRemoteSwiftPackageReference "realm-swift" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 04863A772D8F051A002A55BD /* Products */;
@@ -447,8 +486,9 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleLightContent;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -477,8 +517,9 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleLightContent;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -649,6 +690,14 @@
 				minimumVersion = 8.3.1;
 			};
 		};
+		0403DE5C2D924324009D3A6B /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -692,6 +741,21 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 040012E02D920308008D9CF3 /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
+		};
+		0403DE5D2D924324009D3A6B /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0403DE5C2D924324009D3A6B /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
+		};
+		0403DE612D92449D009D3A6B /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0403DE5C2D924324009D3A6B /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
+		};
+		0403DE642D9244A4009D3A6B /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0403DE5C2D924324009D3A6B /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -10,29 +10,39 @@ import Combine
 import UIComponents
 import Alamofire
 import SharedModels
+import Shared
 
 struct ListView: View {
     
+    // MARK: - Properties
+    
     @ObservedObject var viewModel: ListViewModel
     
+    // MARK: - Body
+    
     var body: some View {
+        
         VStack(spacing: .zero) {
             titleView
-            
-            ScrollView(showsIndicators: false) {
-                LazyVStack {
-                    ForEach(viewModel.state.listPeople, id: \.id.rawValue) { person in
-                        cellView(person: person)
-                            .onAppear {
-                                if person == viewModel.state.listPeople.last {
-                                    viewModel.send(.loadPage)
-                                }
-                                print(person.id)
+            listView
+            Spacer()
+        }
+    }
+    
+    // MARK: - SubViews
+    
+    private var listView: some View {
+        ScrollView(showsIndicators: false) {
+            LazyVStack {
+                ForEach(viewModel.state.listPeople, id: \.id.rawValue) { person in
+                    cellView(person: person)
+                        .onAppear {
+                            if person == viewModel.state.listPeople.last {
+                                viewModel.send(.loadPage)
                             }
-                    }
+                        }
                 }
             }
-            Spacer()
         }
     }
     
@@ -41,7 +51,7 @@ struct ListView: View {
             .foregroundColor(.black)
             .frame(height: 70.0)
             .overlay {
-                Text("Test Task: iOS App with SwiftUI & Open API (Pagination & Favorites)")
+                Text(viewModel.state.title)
                     .font(.headline)
                     .foregroundColor(.white)
                     .padding(.horizontal)
@@ -53,12 +63,16 @@ struct ListView: View {
     
     private func cellView(person: PersonData) -> some View {
         Button {
-            
+            viewModel.send(.selectedPerson(person))
         } label: {
             CellView(
                 image: person.avatar.rawValue,
                 fullName: "\(person.firstName) \(person.lastName)",
-                email: person.email.rawValue
+                email: person.email.rawValue,
+                favorite: .init(
+                    get: { person.isFavorite },
+                    set: { newValue in viewModel.send(.makeFavorite(person, newValue)) }
+                )
             )
             .padding(.horizontal, 16.0)
         }
