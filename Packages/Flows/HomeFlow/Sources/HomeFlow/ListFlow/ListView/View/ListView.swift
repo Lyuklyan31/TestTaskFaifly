@@ -21,15 +21,29 @@ struct ListView: View {
     // MARK: - Body
     
     var body: some View {
-        
-        VStack(spacing: .zero) {
-            titleView
-            listView
-            Spacer()
+        ZStack {
+            gradient.edgesIgnoringSafeArea(.top)
+            
+            VStack(spacing: .zero) {
+                titleView
+                listView
+                Spacer()
+            }
         }
     }
     
     // MARK: - SubViews
+    
+    private var gradient: some View {
+        LinearGradient(
+            gradient: Gradient(colors: [
+                Color.purple.opacity(0.5),
+                Color.blue.opacity(0.5)
+            ]),
+            startPoint: .topLeading,
+            endPoint: .bottomTrailing
+        )
+    }
     
     private var listView: some View {
         ScrollView(showsIndicators: false) {

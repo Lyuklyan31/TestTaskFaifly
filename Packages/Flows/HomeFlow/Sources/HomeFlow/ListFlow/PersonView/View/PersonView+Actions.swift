@@ -11,5 +11,7 @@ extension PersonView {
     
     enum Action {
         case back
+        case follow
+        case toggle(Bool)
     }
 }

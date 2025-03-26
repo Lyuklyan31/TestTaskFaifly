@@ -48,6 +48,7 @@ final class FavoriteFlowCoordinator: NavigationCoordinator<FavoriteFlowRoute> {
     
     private func favoritePersonPresentable() -> Presentable {
         let viewModel = PersonFavoriteViewModel(
+            delegate: favoriteViewModel,
             router: weakRouter,
             inputParameters: .init(
                 data: favoriteViewModel.state.person

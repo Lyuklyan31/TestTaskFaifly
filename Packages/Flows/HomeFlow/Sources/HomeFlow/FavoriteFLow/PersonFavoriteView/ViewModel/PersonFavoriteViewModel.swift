@@ -20,10 +20,14 @@ class PersonFavoriteViewModel: ViewModelProtocol {
     
     var inputParameters: FavoritePersonInputParameters
     
+    weak var delegate: FavoriteViewModelDelegate?
+    
     init(
+        delegate: FavoriteViewModelDelegate,
         router: WeakRouter<FavoriteFlowRoute>,
         inputParameters: FavoritePersonInputParameters
     ) {
+        self.delegate = delegate
         self.inputParameters = inputParameters
         self.router = router
         
@@ -32,7 +36,8 @@ class PersonFavoriteViewModel: ViewModelProtocol {
             email: inputParameters.data.email,
             fullName: inputParameters.data.fullName,
             supportText: inputParameters.data.support,
-            copyrightNotice: ""
+            copyrightNotice: "",
+            isFavorite: inputParameters.data.isFavorite
         )
         
         self.state.copyrightNotice =
@@ -49,6 +54,9 @@ class PersonFavoriteViewModel: ViewModelProtocol {
     func send(_ actions: PersonFavoriteView.Actions) {
         switch actions {
         case .back: router.trigger(.back)
+        case .unfollow:
+            router.trigger(.back)
+            delegate?.makeUnFavorite(person: inputParameters.data)
         }
     }
 }

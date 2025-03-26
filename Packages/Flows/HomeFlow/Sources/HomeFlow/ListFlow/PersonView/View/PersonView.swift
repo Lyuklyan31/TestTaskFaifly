@@ -18,6 +18,8 @@ struct PersonView: View {
     
     var body: some View {
         ZStack {
+            gradientView.ignoresSafeArea()
+            
             VStack(spacing: 20) {
                 HStack(spacing: .zero) {
                     buttonBack
@@ -25,7 +27,11 @@ struct PersonView: View {
                     Spacer()
                 }
                 avatarView(url: viewModel.state.avatar)
-                fullNameView
+                HStack {
+                    fullNameView
+                    Spacer()
+                    buttonFollow
+                }
                 emailView
                 supportView
                 
@@ -33,14 +39,40 @@ struct PersonView: View {
             }
             .padding(.horizontal, 16.0)
             
-            VStack(spacing: .zero) {
-                Spacer()
-                copyrightNotice
-            }
+            copyrightNotice
         }
     }
     
     // MARK: - SubViews
+    
+    private var buttonFollow: some View {
+        Button {
+            viewModel.send(.toggle(!viewModel.state.isFavorite))
+            viewModel.send(.follow)
+        } label: {
+            Circle()
+                .fill(Color.black.opacity(0.3))
+                .stroke(Color.black.opacity(0.1), lineWidth: 1.0)
+                .frame(width: 50.0, height: 50.0)
+                .shadow(radius: 0.4)
+                .overlay {
+                    Image(systemName: viewModel.state.isFavorite ? "star.fill" : "star")
+                        .font(.title)
+                        .foregroundColor(.yellow)
+                }
+        }
+    }
+    
+    private var gradientView: some View {
+        LinearGradient(
+            gradient: Gradient(colors: [
+                Color.red.opacity(0.5),
+                Color.pink.opacity(0.5)
+            ]),
+            startPoint: .topLeading,
+            endPoint: .bottomTrailing
+        )
+    }
     
     private var buttonBack: some View {
         Button {
@@ -91,9 +123,12 @@ struct PersonView: View {
     }
     
     private var copyrightNotice: some View {
-        Text(viewModel.state.copyrightNotice)
-        .font(.caption)
-        .foregroundColor(.gray)
-        .padding(.horizontal, 16.0)
+        VStack(spacing: .zero) {
+            Spacer()
+            Text(viewModel.state.copyrightNotice)
+                .font(.caption)
+                .foregroundColor(.gray)
+                .padding(.horizontal, 16.0)
+        }
     }
 }

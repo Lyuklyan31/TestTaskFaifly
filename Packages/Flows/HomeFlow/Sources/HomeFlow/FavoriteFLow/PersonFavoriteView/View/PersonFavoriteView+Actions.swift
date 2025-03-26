@@ -11,5 +11,6 @@ extension PersonFavoriteView {
     
     enum Actions {
         case back
+        case unfollow
     }
 }

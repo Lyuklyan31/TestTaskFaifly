@@ -14,6 +14,8 @@ struct PersonFavoriteView: View {
     
     var body: some View {
         ZStack {
+            gradientView.ignoresSafeArea()
+            
             VStack(spacing: 20) {
                 HStack(spacing: .zero) {
                     buttonBack
@@ -21,7 +23,11 @@ struct PersonFavoriteView: View {
                     Spacer()
                 }
                 avatarView(url: viewModel.state.avatar)
-                fullNameView
+                HStack(spacing: .zero) {
+                    fullNameView
+                    Spacer()
+                    buttonUnfollow
+                }
                 emailView
                 supportView
                 
@@ -29,13 +35,38 @@ struct PersonFavoriteView: View {
             }
             .padding(.horizontal, 16.0)
             
-            VStack(spacing: .zero) {
-                Spacer()
-                copyrightNotice
-            }
+            copyrightNoticeView
         }
     }
     // MARK: - SubViews
+    
+    private var buttonUnfollow: some View {
+        Button {
+            viewModel.send(.unfollow)
+        } label: {
+            Circle()
+                .fill(Color.black.opacity(0.3))
+                .stroke(Color.black.opacity(0.1), lineWidth: 1.0)
+                .frame(width: 50.0, height: 50.0)
+                .shadow(radius: 0.4)
+                .overlay {
+                    Image(systemName: viewModel.state.isFavorite ? "star.fill" : "star")
+                        .font(.title)
+                        .foregroundColor(.yellow)
+                }
+        }
+    }
+    
+    private var gradientView: some View {
+        LinearGradient(
+            gradient: Gradient(colors: [
+                Color.orange.opacity(0.5),
+                Color.yellow.opacity(0.5)
+            ]),
+            startPoint: .topLeading,
+            endPoint: .bottomTrailing
+        )
+    }
     
     private var buttonBack: some View {
         Button {
@@ -90,5 +121,12 @@ struct PersonFavoriteView: View {
         .font(.caption)
         .foregroundColor(.gray)
         .padding(.horizontal, 16.0)
+    }
+    
+    private var copyrightNoticeView: some View {
+        VStack(spacing: .zero) {
+            Spacer()
+            copyrightNotice
+        }
     }
 }

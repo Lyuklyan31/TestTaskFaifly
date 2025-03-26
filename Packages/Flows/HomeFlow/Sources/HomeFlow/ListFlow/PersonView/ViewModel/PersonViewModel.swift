@@ -8,6 +8,12 @@
 import Foundation
 import XCoordinator
 import UIComponents
+import SharedModels
+import RealmSwift
+
+protocol PersonViewModelDelegate: AnyObject {
+    func toggleFavorite(person: PersonData, isFavorite: Bool)
+}
 
 class PersonViewModel: ViewModelProtocol {
     
@@ -20,7 +26,14 @@ class PersonViewModel: ViewModelProtocol {
     
     private var router: WeakRouter<ListFlowRoute>
     
-    init(router: WeakRouter<ListFlowRoute>, inputParameters: PersonInputParameters) {
+    weak var delegate: PersonViewModelDelegate?
+    
+    init(
+        delegate: PersonViewModelDelegate,
+        router: WeakRouter<ListFlowRoute>,
+        inputParameters: PersonInputParameters
+    ) {
+        self.delegate = delegate
         self.inputParameters = inputParameters
         self.router = router
         
@@ -29,7 +42,8 @@ class PersonViewModel: ViewModelProtocol {
             avatar: inputParameters.data.avatar.rawValue,
             email: inputParameters.data.email.rawValue,
             support: inputParameters.support,
-            copyrightNotice: ""
+            copyrightNotice: "",
+            isFavorite: inputParameters.data.isFavorite
         )
         
         self.state.copyrightNotice =
@@ -46,6 +60,13 @@ class PersonViewModel: ViewModelProtocol {
     func send(_ actions: Actions) {
         switch actions {
         case .back: router.trigger(.back)
+        case .follow:
+            delegate?.toggleFavorite(
+                person: inputParameters.data,
+                isFavorite: self.state.isFavorite
+            )
+        case .toggle(let newValue):
+            self.state.isFavorite = newValue
         }
     }
 }

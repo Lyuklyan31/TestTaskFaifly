@@ -82,16 +82,17 @@ class ListViewModel: ViewModelProtocol {
     
     func updatePersonFavoriteStatus(person: PersonData, newValue: Bool) {
         let realm = try! Realm()
-        
+
         if let index = self.state.listPeople.firstIndex(of: person) {
             self.state.listPeople[index].isFavorite = newValue
         }
-        
+
         try! realm.write {
             if newValue {
                 let personRealm = PersonRealm(personData: person, supportData: self.state.supportText)
                 personRealm.isFavorite = true
                 realm.add(personRealm, update: .all)
+                
             } else {
                 if let personRealm = realm.objects(PersonRealm.self).filter("ownerId == %@", person.id.rawValue).first {
                     realm.delete(personRealm)
@@ -115,4 +116,26 @@ extension ListViewModel: FavoriteViewModelDelegate {
             }
         }
     }
+}
+
+extension ListViewModel: PersonViewModelDelegate {
+    
+    func toggleFavorite(person: PersonData, isFavorite: Bool) {
+        updatePersonFavoriteStatus(person: person, newValue: isFavorite)
+    }
+    
+//    func toggleFavorite(person: PersonRealm, isFavorite: Bool) {
+//        let realm = try! Realm()
+//        
+//        try! realm.write {
+//            if isFavorite {
+//                person.isFavorite = true
+//                realm.add(person, update: .all)
+//            } else {
+//                if let personRealm = realm.objects(PersonRealm.self).filter("ownerId == %@", person.id).first {
+//                    realm.delete(personRealm)
+//                }
+//            }
+//        }
+//    }
 }

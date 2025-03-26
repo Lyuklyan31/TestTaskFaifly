@@ -19,16 +19,33 @@ struct FavoriteView: View {
     @ObservedResults(PersonRealm.self) var personRealm
     
     var body: some View {
-        titleView
-        ScrollView(showsIndicators: false) {
-            ForEach(personRealm, id: \.id) { person in
-                buttonView(person)
-                    .padding(.horizontal, 16.0)
+        ZStack {
+            gradient.edgesIgnoringSafeArea(.top)
+            VStack(spacing: .zero) {
+                titleView
+                ScrollView(showsIndicators: false) {
+                    ForEach(personRealm, id: \.id) { person in
+                        buttonView(person)
+                            .padding(.horizontal, 16.0)
+                    }
+                }
             }
+            Spacer()
         }
     }
     
     // MARK: - SubViews
+    
+    private var gradient: some View {
+        LinearGradient(
+            gradient: Gradient(colors: [
+                Color.purple.opacity(0.5),
+                Color.blue.opacity(0.5)
+            ]),
+            startPoint: .topLeading,
+            endPoint: .bottomTrailing
+        )
+    }
     
     private func buttonView(_ person: PersonRealm) -> some View {
         Button {
@@ -57,7 +74,7 @@ struct FavoriteView: View {
                     .padding(.horizontal)
                     .multilineTextAlignment(.center)
                     .lineLimit(nil)
-                    .padding(.horizontal, 16)
+                    .padding(.horizontal, 16.0)
             }
     }
 }

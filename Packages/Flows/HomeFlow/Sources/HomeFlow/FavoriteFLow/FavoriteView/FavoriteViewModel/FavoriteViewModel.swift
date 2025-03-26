@@ -45,3 +45,9 @@ class FavoriteViewModel: ViewModelProtocol {
         }
     }
 }
+
+extension FavoriteViewModel: FavoriteViewModelDelegate {
+    func makeUnFavorite(person: PersonRealm) {
+        delegate?.makeUnFavorite(person: person)
+    }
+}

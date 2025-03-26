@@ -48,6 +48,7 @@ final class ListFlowCoordinator: NavigationCoordinator<ListFlowRoute> {
     
     private func personPresentable() -> Presentable {
         let viewModel = PersonViewModel(
+            delegate: listViewModel,
             router: weakRouter,
             inputParameters: .init(
                 data: listViewModel.state.selectedPerson,

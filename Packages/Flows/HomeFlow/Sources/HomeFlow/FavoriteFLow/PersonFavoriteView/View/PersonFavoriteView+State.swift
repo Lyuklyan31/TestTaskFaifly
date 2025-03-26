@@ -15,5 +15,6 @@ extension PersonFavoriteView {
         var fullName: String
         var supportText: String
         var copyrightNotice: String
+        var isFavorite: Bool
     }
 }

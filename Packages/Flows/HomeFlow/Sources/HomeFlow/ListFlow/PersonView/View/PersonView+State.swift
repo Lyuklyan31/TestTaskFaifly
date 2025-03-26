@@ -16,5 +16,6 @@ extension PersonView {
         var email: String
         var support: String
         var copyrightNotice: String
+        var isFavorite: Bool
     }
 }
