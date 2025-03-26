@@ -10,10 +10,15 @@ import SwiftUI
 
 public struct CellView: View {
     
+    // MARK: - Properties
+    
     public var image: String
     public var fullName: String
     public var email: String
+    
     @Binding public var favorite: Bool
+    
+    // MARK: - Inits
      
     public init(
         image: String,
@@ -26,6 +31,8 @@ public struct CellView: View {
          self.email = email
          self._favorite = favorite
      }
+    
+    // MARK: - Body
     
     public var body: some View {
         HStack(spacing: 20.0) {

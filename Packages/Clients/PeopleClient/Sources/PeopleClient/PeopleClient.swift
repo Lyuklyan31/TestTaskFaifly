@@ -5,6 +5,8 @@ import SharedModels
 
 final class PeopleClient: PeopleClientProtocol {
     
+    // MARK: - Properties
+    
     var state: CreatePeopleData { currentStateSubject.value }
     
     var publisher: AnyPublisher<CreatePeopleData, Never> {
@@ -14,6 +16,8 @@ final class PeopleClient: PeopleClientProtocol {
     private let networkClient: any NetworkClientProtocol
     
     private let currentStateSubject: CurrentValueSubject<CreatePeopleData, Never>
+    
+    // MARK: - Inits
     
     init(
         networkClient: any NetworkClientProtocol

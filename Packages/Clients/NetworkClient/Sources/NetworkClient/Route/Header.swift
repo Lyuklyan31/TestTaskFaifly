@@ -13,26 +13,15 @@ public struct Header {
     
     public typealias Key = String
     public typealias Value = String
-
+    
     // MARK: - Properties
     
     public let name: Key
     public let value: Value
-
-    // MARK: - Factory method
-
-    public static func acceptType(_ value: AcceptType) -> Self {
-        .init(name: "Accept", value: value.value)
-    }
     
-    public enum AcceptType {
-        case json
-        
-        var value: String {
-            switch self {
-            case .json:
-                return "application/json"
-            }
-        }
+    // MARK: - Factory method
+    
+    public static func acceptType() -> Self {
+        .init(name: "Accept", value: "application/json")
     }
 }

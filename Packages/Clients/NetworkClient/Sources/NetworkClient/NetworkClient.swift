@@ -13,6 +13,8 @@ import Alamofire
 
 public class NetworkClient: NetworkClientProtocol {
     
+    // MARK: - Properties
+    
     public var state: NetworkClientState { valueSubject.value }
     
     public var publisher: AnyPublisher<NetworkClientState, Never> {
@@ -25,6 +27,8 @@ public class NetworkClient: NetworkClientProtocol {
     
     private var bag: Set<AnyCancellable> = .init()
 
+    // MARK: - Inits
+    
     init(decoder: JSONDecoder) {
         self.connectionMonitor = .init()
         self.decoder = decoder
@@ -40,6 +44,8 @@ public class NetworkClient: NetworkClientProtocol {
         }
         .store(in: &bag)
     }
+    
+    // MARK: - Public api
     
     @discardableResult
     public func send<T: Decodable>(route: Route, responseType: T.Type) async -> Result<T, NetworkClientError> {

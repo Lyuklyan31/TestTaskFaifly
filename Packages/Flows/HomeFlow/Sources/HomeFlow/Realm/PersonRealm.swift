@@ -6,11 +6,11 @@
 //
 
 import RealmSwift
-
-import RealmSwift
 import SharedModels
 
 public class PersonRealm: Object, ObjectKeyIdentifiable {
+    
+    // MARK: - Properties
     
     @Persisted(primaryKey: true) public var id: ObjectId
     @Persisted var fullName: String = ""
@@ -20,7 +20,8 @@ public class PersonRealm: Object, ObjectKeyIdentifiable {
     @Persisted var support: String = ""
     @Persisted var ownerId: Int = 0
     
-
+    // MARK: - Initializers
+    
     convenience init(
         fullName: String,
         email: String,
@@ -38,6 +39,8 @@ public class PersonRealm: Object, ObjectKeyIdentifiable {
         self.ownerId = ownerId
     }
 }
+
+// MARK: - Convenience Initializer
 
 extension PersonRealm {
     convenience init(personData: PersonData, supportData: String) {

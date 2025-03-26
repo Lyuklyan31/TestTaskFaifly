@@ -7,6 +7,8 @@
 
 import Foundation
 
+// MARK: - State
+
 extension FavoriteView {
     
     struct State {

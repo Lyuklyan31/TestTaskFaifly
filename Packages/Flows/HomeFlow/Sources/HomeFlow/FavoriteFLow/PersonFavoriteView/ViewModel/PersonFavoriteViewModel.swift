@@ -11,8 +11,12 @@ import UIComponents
 
 class PersonFavoriteViewModel: ViewModelProtocol {
     
+    // MARK: - Declarations
+    
     typealias State = PersonFavoriteView.State
     typealias Actions = PersonFavoriteView.Actions
+    
+    // MARK: - Properties
     
     @Published var state: State
     
@@ -21,6 +25,8 @@ class PersonFavoriteViewModel: ViewModelProtocol {
     var inputParameters: FavoritePersonInputParameters
     
     weak var delegate: FavoriteViewModelDelegate?
+    
+    // MARK: - Inits
     
     init(
         delegate: FavoriteViewModelDelegate,
@@ -50,6 +56,8 @@ class PersonFavoriteViewModel: ViewModelProtocol {
                     It is my personal intellectual property and may not be used, copied, or transferred to third parties without my written permission.
                     """
     }
+    
+    // MARK: - Internal API
     
     func send(_ actions: PersonFavoriteView.Actions) {
         switch actions {

@@ -17,8 +17,12 @@ protocol PersonViewModelDelegate: AnyObject {
 
 class PersonViewModel: ViewModelProtocol {
     
+    // MARK: - Declarations
+    
     typealias State = PersonView.State
     typealias Actions = PersonView.Action
+    
+    // MARK: - Properties
     
     @Published var state: State
     
@@ -27,6 +31,8 @@ class PersonViewModel: ViewModelProtocol {
     private var router: WeakRouter<ListFlowRoute>
     
     weak var delegate: PersonViewModelDelegate?
+    
+    // MARK: - Inits
     
     init(
         delegate: PersonViewModelDelegate,
@@ -56,6 +62,8 @@ class PersonViewModel: ViewModelProtocol {
                     It is my personal intellectual property and may not be used, copied, or transferred to third parties without my written permission.
                     """
     }
+    
+    // MARK: - Internal API
     
     func send(_ actions: Actions) {
         switch actions {

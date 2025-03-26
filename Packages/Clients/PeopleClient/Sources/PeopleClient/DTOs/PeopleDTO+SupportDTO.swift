@@ -8,6 +8,8 @@
 import SharedModels
 import Foundation
 
+// MARK: - SupportDTO
+
 extension PeopleDTO {
      
     struct SupportDTO: Codable {
@@ -16,6 +18,8 @@ extension PeopleDTO {
     }
 }
 
+// MARK: - CodingKeys
+
 extension PeopleDTO.SupportDTO {
     
     enum CodingKeys: String, CodingKey {
@@ -23,6 +27,8 @@ extension PeopleDTO.SupportDTO {
         case text
     }
 }
+
+// MARK: - Init from DTO
 
 extension SupportData {
     

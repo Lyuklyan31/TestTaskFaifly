@@ -18,6 +18,8 @@ struct PeopleDTO: Codable {
     let support: SupportDTO
 }
 
+// MARK: - CodingKeys
+
 extension PeopleDTO {
     
     enum CodingKeys: String, CodingKey {
@@ -29,6 +31,8 @@ extension PeopleDTO {
         case support
     }
 }
+
+// MARK: - Init from DTO
 
 extension CreatePeopleData {
     

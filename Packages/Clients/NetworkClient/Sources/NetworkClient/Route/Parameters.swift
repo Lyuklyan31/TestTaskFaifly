@@ -19,12 +19,3 @@ public enum Parameters {
         return query
     }
 }
-
-extension Parameters {
-    
-    public enum Encoding {
-        
-        case url
-        case json
-    }
-}

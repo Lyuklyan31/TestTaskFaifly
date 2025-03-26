@@ -36,6 +36,8 @@ final class FavoriteFlowCoordinator: NavigationCoordinator<FavoriteFlowRoute> {
         favoriteViewModel.router = weakRouter
     }
     
+    // MARK: - Public api
+    
     override func prepareTransition(for route: FavoriteFlowRoute) -> NavigationTransition {
         switch route {
         case .root: return .set([rootPresentable])
@@ -45,6 +47,8 @@ final class FavoriteFlowCoordinator: NavigationCoordinator<FavoriteFlowRoute> {
             return .push(presentable)
         }
     }
+    
+    // MARK: - Private api
     
     private func favoritePersonPresentable() -> Presentable {
         let viewModel = PersonFavoriteViewModel(

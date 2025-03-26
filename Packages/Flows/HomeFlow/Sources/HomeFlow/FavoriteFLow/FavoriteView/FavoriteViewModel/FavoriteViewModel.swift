@@ -18,14 +18,20 @@ protocol FavoriteViewModelDelegate: AnyObject {
 
 class FavoriteViewModel: ViewModelProtocol {
     
+    // MARK: - Declarations
+    
     typealias State = FavoriteView.State
     typealias Actions = FavoriteView.Actions
+    
+    // MARK: - Properties
     
     @Published var state: State
     
     weak var delegate: FavoriteViewModelDelegate?
     
     var router: WeakRouter<FavoriteFlowRoute>?
+    
+    // MARK: - Inits
     
     init(delegate: FavoriteViewModelDelegate) {
         self.delegate = delegate
@@ -35,6 +41,8 @@ class FavoriteViewModel: ViewModelProtocol {
             title: "Test Task: iOS App with SwiftUI & Open API (Pagination & Favorites)"
         )
     }
+    
+    // MARK: - Internal API
     
     func send(_ actions: Actions) {
         switch actions {
@@ -46,7 +54,10 @@ class FavoriteViewModel: ViewModelProtocol {
     }
 }
 
+// MARK: - FavoriteViewModelDelegate
+
 extension FavoriteViewModel: FavoriteViewModelDelegate {
+    
     func makeUnFavorite(person: PersonRealm) {
         delegate?.makeUnFavorite(person: person)
     }

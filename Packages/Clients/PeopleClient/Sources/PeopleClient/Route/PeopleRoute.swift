@@ -33,8 +33,8 @@ struct PeopleRoute: Route {
         .GET
     }
      
-    var headers: [Header] {
-        [.acceptType(.json)]
+    var headers: Header {
+        .acceptType()
     }
     
     var parameters: Parameters {

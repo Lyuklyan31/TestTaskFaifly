@@ -8,6 +8,8 @@
 import Foundation
 import RealmSwift
 
+// MARK: - Actions
+
 extension FavoriteView {
     
     enum Actions {

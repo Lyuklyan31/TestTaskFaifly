@@ -10,7 +10,11 @@ import Kingfisher
 
 struct PersonFavoriteView: View {
     
+    // MARK: - Properties
+    
     @ObservedObject var viewModel: PersonFavoriteViewModel
+    
+    // MARK: - Body
     
     var body: some View {
         ZStack {

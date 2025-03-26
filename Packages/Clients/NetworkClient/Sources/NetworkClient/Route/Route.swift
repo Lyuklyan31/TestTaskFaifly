@@ -12,6 +12,6 @@ public protocol Route {
     var baseURL: String { get }
     var endpoint: String { get }
     var method: APIMethod { get }
-    var headers: [Header] { get }
+    var headers: Header { get }
     var parameters: Parameters { get }
 }

@@ -8,6 +8,8 @@
 import Foundation
 import SharedModels
 
+// MARK: Action
+
 extension ListView {
     
     enum Action {

@@ -11,6 +11,8 @@ import Combine
 
 final class ConnectionMonitor {
     
+    // MARK: - Declarations
+    
     typealias State = NetworkClientState.ConnectionStatus
     
     // MARK: - Properties

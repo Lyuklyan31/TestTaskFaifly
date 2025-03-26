@@ -18,6 +18,8 @@ struct FavoriteView: View {
     
     @ObservedResults(PersonRealm.self) var personRealm
     
+    // MARK: - Body
+    
     var body: some View {
         ZStack {
             gradient.edgesIgnoringSafeArea(.top)

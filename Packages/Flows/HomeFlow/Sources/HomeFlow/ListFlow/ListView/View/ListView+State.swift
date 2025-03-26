@@ -7,6 +7,9 @@
 
 import Foundation
 import SharedModels
+import NetworkClient
+
+// MARK: - State
 
 extension ListView {
     
@@ -17,6 +20,7 @@ extension ListView {
         var supportText: String
         var title: String
         var favorite: Bool
+        var networkStatus: NetworkClientState.ConnectionStatus
     }
 }
 

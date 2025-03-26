@@ -17,6 +17,8 @@ final class Request: @unchecked Sendable {
     }
 }
 
+// MARK: - DataRequest
+
 extension Request {
     
     public func dataRequest() -> DataRequest {
@@ -25,6 +27,8 @@ extension Request {
     }
 }
 
+// MARK: - URLRequestConvertible
+
 extension Request: URLRequestConvertible {
     
     public func asURLRequest() throws -> URLRequest {
@@ -32,13 +36,15 @@ extension Request: URLRequestConvertible {
     }
 }
 
+// MARK: - URLRequest
+ 
 extension Route {
     
     func asURLRequest() throws -> URLRequest {
         var request = try createRequest()
         
         request.httpMethod = method.rawValue
-        headers.forEach { request.addValue($0.value, forHTTPHeaderField: $0.name) }
+        request.addValue(headers.value, forHTTPHeaderField: headers.name)
         
         switch parameters {
         case .plain:

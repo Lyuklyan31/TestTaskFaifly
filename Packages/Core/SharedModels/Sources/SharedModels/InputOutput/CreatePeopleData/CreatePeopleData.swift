@@ -19,6 +19,8 @@ public struct CreatePeopleData: Equatable {
     public var data: [PersonData]
     public var support: SupportData
     
+    // MARK: - Inits
+    
     public init(
         page: Page = .init(1),
         perPage: ParPage = .init(6),
@@ -35,6 +37,8 @@ public struct CreatePeopleData: Equatable {
         self.support = support
     }
 }
+
+// MARK: - Tagged's
 
 extension CreatePeopleData {
 

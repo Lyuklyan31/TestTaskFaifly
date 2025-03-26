@@ -7,6 +7,8 @@
 
 import Foundation
 
+// MARK: - Actions
+
 extension PersonFavoriteView {
     
     enum Actions {

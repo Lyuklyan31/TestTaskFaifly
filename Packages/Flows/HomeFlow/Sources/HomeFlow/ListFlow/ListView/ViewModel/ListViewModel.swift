@@ -15,20 +15,28 @@ import Combine
 import Shared
 import UIComponents
 import RealmSwift
+import NetworkClient
 
 class ListViewModel: ViewModelProtocol {
     
+    // MARK: - Declarations
+    
     typealias State = ListView.State
     typealias Actions = ListView.Action
+    
+    // MARK: - Properties
     
     @Published var state: State
     
     var router: WeakRouter<ListFlowRoute>?
     
     @Injected(\.peopleClient) var peopleClient: any PeopleClientProtocol
+    @Injected(\.networkClient) var networkClient: any NetworkClientProtocol
     
     private var bag: Set<AnyCancellable> = .init()
     private var isLoading = false
+    
+    // MARK: - Inits
     
     init() {
         self.state = .init(
@@ -37,11 +45,19 @@ class ListViewModel: ViewModelProtocol {
             selectedPerson: .init(),
             supportText: .init(),
             title: "Test Task: iOS App with SwiftUI & Open API (Pagination & Favorites)",
-            favorite: false
-            
+            favorite: false,
+            networkStatus: .disconnected
         )
         loadPeople()
+        
+        networkClient.publisher.sink { [weak self] network in
+            guard let self = self else { return }
+            self.state.networkStatus = network.connectionStatus
+        }
+        .store(in: &bag)
     }
+    
+    // MARK: - Internal API
     
     func send(_ actions: ListView.Action) {
         switch actions {
@@ -55,7 +71,9 @@ class ListViewModel: ViewModelProtocol {
         }
     }
     
-    func loadPeople() {
+    // MARK: - Helpers
+
+    private func loadPeople() {
         guard !isLoading else { return }
         isLoading = true
         
@@ -80,7 +98,7 @@ class ListViewModel: ViewModelProtocol {
         }
     }
     
-    func updatePersonFavoriteStatus(person: PersonData, newValue: Bool) {
+   private func updatePersonFavoriteStatus(person: PersonData, newValue: Bool) {
         let realm = try! Realm()
 
         if let index = self.state.listPeople.firstIndex(of: person) {
@@ -102,7 +120,10 @@ class ListViewModel: ViewModelProtocol {
     }
 }
 
+// MARK: - FavoriteViewModelDelegate
+
 extension ListViewModel: FavoriteViewModelDelegate {
+    
     func makeUnFavorite(person: PersonRealm) {
         let realm = try! Realm()
         
@@ -118,24 +139,11 @@ extension ListViewModel: FavoriteViewModelDelegate {
     }
 }
 
+// MARK: - PersonViewModelDelegate
+
 extension ListViewModel: PersonViewModelDelegate {
     
     func toggleFavorite(person: PersonData, isFavorite: Bool) {
         updatePersonFavoriteStatus(person: person, newValue: isFavorite)
     }
-    
-//    func toggleFavorite(person: PersonRealm, isFavorite: Bool) {
-//        let realm = try! Realm()
-//        
-//        try! realm.write {
-//            if isFavorite {
-//                person.isFavorite = true
-//                realm.add(person, update: .all)
-//            } else {
-//                if let personRealm = realm.objects(PersonRealm.self).filter("ownerId == %@", person.id).first {
-//                    realm.delete(personRealm)
-//                }
-//            }
-//        }
-//    }
 }

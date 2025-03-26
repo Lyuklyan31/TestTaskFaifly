@@ -10,12 +10,16 @@ import Tagged
 
 public struct PersonData: Equatable {
     
+    // MARK: - Properties
+    
     public var id: ID
     public var email: Email
     public var firstName: FirstName
     public var lastName: LastName
     public var avatar: Avatar
     public var isFavorite: Bool
+    
+    // MARK: - Inits
     
     public init(
         id: ID = .init(1),
@@ -33,6 +37,8 @@ public struct PersonData: Equatable {
         self.isFavorite = isFavorite
     }
 }
+
+// MARK: - Tagged's
 
 extension PersonData {
     

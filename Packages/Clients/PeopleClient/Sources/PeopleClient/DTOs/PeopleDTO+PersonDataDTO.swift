@@ -8,6 +8,8 @@
 import Foundation
 import SharedModels
 
+// MARK: - PersonDataDTO
+
 extension PeopleDTO {
     
     struct PersonDataDTO: Codable {
@@ -20,6 +22,8 @@ extension PeopleDTO {
     }
 }
 
+// MARK: - CodingKeys
+
 extension PeopleDTO.PersonDataDTO {
     
     enum CodingKeys: String, CodingKey {
@@ -30,6 +34,8 @@ extension PeopleDTO.PersonDataDTO {
         case avatar
     }
 }
+
+// MARK: - Init from DTO
 
 extension PersonData {
     

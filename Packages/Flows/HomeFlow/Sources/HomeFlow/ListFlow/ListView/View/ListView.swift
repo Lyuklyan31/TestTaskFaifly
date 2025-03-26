@@ -23,7 +23,6 @@ struct ListView: View {
     var body: some View {
         ZStack {
             gradient.edgesIgnoringSafeArea(.top)
-            
             VStack(spacing: .zero) {
                 titleView
                 listView
@@ -45,17 +44,29 @@ struct ListView: View {
         )
     }
     
+    private var noInternetConnection: some View {
+        ContentUnavailableView(
+            "No Internet Connection",
+            systemImage: "wifi.exclamationmark",
+            description: Text("Please check your connection and try again.")
+        )
+    }
+    
     private var listView: some View {
         ScrollView(showsIndicators: false) {
-            LazyVStack {
-                ForEach(viewModel.state.listPeople, id: \.id.rawValue) { person in
-                    cellView(person: person)
-                        .padding(.horizontal, 16.0)
-                        .onAppear {
-                            if person == viewModel.state.listPeople.last {
-                                viewModel.send(.loadPage)
+            if viewModel.networkClient.state.connectionStatus == .disconnected {
+                noInternetConnection
+            } else {
+                LazyVStack {
+                    ForEach(viewModel.state.listPeople, id: \.id.rawValue) { person in
+                        cellView(person: person)
+                            .padding(.horizontal, 16.0)
+                            .onAppear {
+                                if person == viewModel.state.listPeople.last {
+                                    viewModel.send(.loadPage)
+                                }
                             }
-                        }
+                    }
                 }
             }
         }

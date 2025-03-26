@@ -36,6 +36,8 @@ final class ListFlowCoordinator: NavigationCoordinator<ListFlowRoute> {
         listViewModel.router = weakRouter
     }
     
+    // MARK: - Public api
+    
     override func prepareTransition(for route: ListFlowRoute) -> NavigationTransition {
         switch route {
         case .root: return .set([rootPresentable])
@@ -45,6 +47,8 @@ final class ListFlowCoordinator: NavigationCoordinator<ListFlowRoute> {
             return .push(presentable)
         }
     }
+    
+    // MARK: - Private api
     
     private func personPresentable() -> Presentable {
         let viewModel = PersonViewModel(

@@ -27,6 +27,7 @@ struct PersonView: View {
                     Spacer()
                 }
                 avatarView(url: viewModel.state.avatar)
+                
                 HStack {
                     fullNameView
                     Spacer()
