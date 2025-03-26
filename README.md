@@ -48,4 +48,4 @@ If you encounter any issues with SPM dependencies, try cleaning the build folder
 ---
 
 ### Demo
-![App Demo](Assets/demo.gif)
+![App Demo](demo.gif)
