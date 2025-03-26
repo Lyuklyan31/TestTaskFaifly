@@ -15,7 +15,7 @@ import SharedModels
 enum ListFlowRoute: Route {
     case root
     case back
-    case person(InputParameters)
+    case person(PersonInputParameters)
 }
 
 final class ListFlowCoordinator: NavigationCoordinator<ListFlowRoute> {
@@ -27,8 +27,8 @@ final class ListFlowCoordinator: NavigationCoordinator<ListFlowRoute> {
     
     // MARK: - Inits
     
-    init(rootViewController: RootViewController) {
-        self.listViewModel = ListViewModel()
+    init(rootViewController: RootViewController, listViewModel: ListViewModel) {
+        self.listViewModel = listViewModel
         let viewController = ListView(viewModel: listViewModel).hostable()
         rootPresentable = viewController
         
@@ -61,7 +61,7 @@ final class ListFlowCoordinator: NavigationCoordinator<ListFlowRoute> {
 }
 // MARK: - InputParameters
 
-struct InputParameters {
+struct PersonInputParameters {
     var data: PersonData
     var support: String
 }

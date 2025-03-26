@@ -17,13 +17,16 @@ public class PersonRealm: Object, ObjectKeyIdentifiable {
     @Persisted var email: String = ""
     @Persisted var avatar: String = ""
     @Persisted var isFavorite: Bool = false
+    @Persisted var support: String = ""
     @Persisted var ownerId: Int = 0
+    
 
     convenience init(
         fullName: String,
         email: String,
         avatar: String,
         isFavorite: Bool,
+        support: String,
         ownerId: Int
     ) {
         self.init()
@@ -31,18 +34,20 @@ public class PersonRealm: Object, ObjectKeyIdentifiable {
         self.email = email
         self.avatar = avatar
         self.isFavorite = isFavorite
+        self.support = support
         self.ownerId = ownerId
     }
 }
 
 extension PersonRealm {
-    convenience init(personData: PersonData) {
+    convenience init(personData: PersonData, supportData: String) {
         self.init()
         self.id = ObjectId.generate()
         self.fullName = "\(personData.firstName.rawValue) \(personData.lastName.rawValue)"
         self.email = personData.email.rawValue
         self.avatar = personData.avatar.rawValue
         self.isFavorite = personData.isFavorite
+        self.support = supportData
         self.ownerId = personData.id.rawValue
     }
 }

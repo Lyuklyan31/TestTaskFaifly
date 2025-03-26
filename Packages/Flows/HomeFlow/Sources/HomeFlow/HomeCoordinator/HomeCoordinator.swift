@@ -15,8 +15,9 @@ public class HomeCoordinator: TabBarCoordinator<HomeTabRoute> {
     private let favoriteCoordinator: Presentable
     
     public init(initialRoute: HomeTabRoute) {
-        self.listCoordinator = Self.preparePresentable(for: .list)
-        self.favoriteCoordinator = Self.preparePresentable(for: .favorite)
+        let listViewModel = ListViewModel()
+        self.listCoordinator = Self.preparePresentable(for: .list, listViewModel: listViewModel)
+        self.favoriteCoordinator = Self.preparePresentable(for: .favorite, listViewModel: listViewModel)
         
         let initialSelectedTab: Presentable
         switch initialRoute {
@@ -78,13 +79,13 @@ public class HomeCoordinator: TabBarCoordinator<HomeTabRoute> {
         )
     }
     
-    static private func preparePresentable(for route: HomeTabRoute) -> Presentable {
+    static private func preparePresentable(for route: HomeTabRoute, listViewModel: ListViewModel) -> Presentable {
         let navigationController = navigationController()
         switch route {
         case .list:
-            return ListFlowCoordinator(rootViewController: navigationController)
+            return ListFlowCoordinator(rootViewController: navigationController, listViewModel: listViewModel)
         case .favorite:
-            return FavoriteFlowCoordinator(rootViewController: navigationController)
+            return FavoriteFlowCoordinator(rootViewController: navigationController, delegate: listViewModel)
         }
         
     }

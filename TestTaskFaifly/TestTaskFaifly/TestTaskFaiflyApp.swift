@@ -17,9 +17,9 @@ struct TestTaskFaiflyApp: SwiftUI.App {
     
     init() {
             Realm.Configuration.defaultConfiguration = Realm.Configuration(
-                schemaVersion: 1,
+                schemaVersion: 2,
                 migrationBlock: { migration, oldSchemaVersion in
-                    if oldSchemaVersion < 1 {
+                    if oldSchemaVersion < 2 {
                         migration.enumerateObjects(ofType: PersonRealm.className()) { oldObject, newObject in
                             newObject!["ownerId"] = 0
                         }

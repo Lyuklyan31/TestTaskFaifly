@@ -67,6 +67,15 @@ class ListViewModel: ViewModelProtocol {
                 self.state.listPeople.append(contentsOf: peopleData.data)
                 self.state.page += 1
                 self.isLoading = false
+                
+                let realm = try! Realm()
+                for person in self.state.listPeople {
+                    if let personRealm = realm.objects(PersonRealm.self).filter("ownerId == %@", person.id.rawValue).first {
+                        if let index = self.state.listPeople.firstIndex(of: person) {
+                            self.state.listPeople[index].isFavorite = personRealm.isFavorite
+                        }
+                    }
+                }
             }
         }
     }
@@ -78,22 +87,31 @@ class ListViewModel: ViewModelProtocol {
             self.state.listPeople[index].isFavorite = newValue
         }
         
-        if !newValue {
-            if let personRealm = realm.objects(PersonRealm.self).filter("ownerId == %@", person.id.rawValue).first {
-                try! realm.write {
+        try! realm.write {
+            if newValue {
+                let personRealm = PersonRealm(personData: person, supportData: self.state.supportText)
+                personRealm.isFavorite = true
+                realm.add(personRealm, update: .all)
+            } else {
+                if let personRealm = realm.objects(PersonRealm.self).filter("ownerId == %@", person.id.rawValue).first {
                     realm.delete(personRealm)
                 }
             }
-        } else {
-            if let personRealm = realm.objects(PersonRealm.self).filter("ownerId == %@", person.id.rawValue).first {
-                try! realm.write {
-                    personRealm.isFavorite = newValue
-                }
-            } else {
-                let personRealm = PersonRealm(personData: person)
-                try! realm.write {
-                    realm.add(personRealm)
-                }
+        }
+    }
+}
+
+extension ListViewModel: FavoriteViewModelDelegate {
+    func makeUnFavorite(person: PersonRealm) {
+        let realm = try! Realm()
+        
+        if let index = self.state.listPeople.firstIndex(where: { $0.id.rawValue == person.ownerId }) {
+            self.state.listPeople[index].isFavorite = false
+        }
+        
+        try! realm.write {
+            if let personRealm = realm.objects(PersonRealm.self).filter("ownerId == %@", person.ownerId).first {
+                realm.delete(personRealm)
             }
         }
     }

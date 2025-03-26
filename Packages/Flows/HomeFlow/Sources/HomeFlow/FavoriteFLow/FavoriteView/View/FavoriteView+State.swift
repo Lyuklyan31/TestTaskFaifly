@@ -11,5 +11,7 @@ extension FavoriteView {
     
     struct State {
         var favoritePeople: [PersonRealm]
+        var person: PersonRealm
+        var title: String
     }
 }

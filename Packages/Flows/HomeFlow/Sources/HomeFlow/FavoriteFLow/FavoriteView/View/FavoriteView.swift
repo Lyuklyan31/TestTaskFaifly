@@ -12,13 +12,28 @@ import RealmSwift
 
 struct FavoriteView: View {
     
+    // MARK: - Proprties
+    
     @ObservedObject var viewModel: FavoriteViewModel
     
     @ObservedResults(PersonRealm.self) var personRealm
     
     var body: some View {
-
-        ForEach(personRealm, id: \.id) { person in
+        titleView
+        ScrollView(showsIndicators: false) {
+            ForEach(personRealm, id: \.id) { person in
+                buttonView(person)
+                    .padding(.horizontal, 16.0)
+            }
+        }
+    }
+    
+    // MARK: - SubViews
+    
+    private func buttonView(_ person: PersonRealm) -> some View {
+        Button {
+            viewModel.send(.selectedPerson(person))
+        } label: {
             CellView(
                 image: person.avatar,
                 fullName: person.fullName,
@@ -29,5 +44,20 @@ struct FavoriteView: View {
                 )
             )
         }
+    }
+    
+    private var titleView: some View {
+        Rectangle()
+            .foregroundColor(.black)
+            .frame(height: 70.0)
+            .overlay {
+                Text(viewModel.state.title)
+                    .font(.headline)
+                    .foregroundColor(.white)
+                    .padding(.horizontal)
+                    .multilineTextAlignment(.center)
+                    .lineLimit(nil)
+                    .padding(.horizontal, 16)
+            }
     }
 }

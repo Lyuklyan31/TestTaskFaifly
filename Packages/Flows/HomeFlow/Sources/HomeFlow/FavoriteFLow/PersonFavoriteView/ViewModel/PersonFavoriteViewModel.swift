@@ -1,34 +1,37 @@
 //
-//  PersonViewModel.swift
+//  PersonFavoriteViewModel.swift
 //  HomeFlow
 //
-//  Created by Oleh Liuklian  on 24.03.2025.
+//  Created by Oleh Liuklian  on 26.03.2025.
 //
 
 import Foundation
 import XCoordinator
 import UIComponents
 
-class PersonViewModel: ViewModelProtocol {
+class PersonFavoriteViewModel: ViewModelProtocol {
     
-    typealias State = PersonView.State
-    typealias Actions = PersonView.Action
+    typealias State = PersonFavoriteView.State
+    typealias Actions = PersonFavoriteView.Actions
     
     @Published var state: State
     
-    var inputParameters: PersonInputParameters
+    private var router: WeakRouter<FavoriteFlowRoute>
     
-    private var router: WeakRouter<ListFlowRoute>
+    var inputParameters: FavoritePersonInputParameters
     
-    init(router: WeakRouter<ListFlowRoute>, inputParameters: PersonInputParameters) {
+    init(
+        router: WeakRouter<FavoriteFlowRoute>,
+        inputParameters: FavoritePersonInputParameters
+    ) {
         self.inputParameters = inputParameters
         self.router = router
         
         self.state = .init(
-            fullName: "\(inputParameters.data.firstName) \(inputParameters.data.lastName)" ,
-            avatar: inputParameters.data.avatar.rawValue,
-            email: inputParameters.data.email.rawValue,
-            support: inputParameters.support,
+            avatar: inputParameters.data.avatar,
+            email: inputParameters.data.email,
+            fullName: inputParameters.data.fullName,
+            supportText: inputParameters.data.support,
             copyrightNotice: ""
         )
         
@@ -43,7 +46,7 @@ class PersonViewModel: ViewModelProtocol {
                     """
     }
     
-    func send(_ actions: Actions) {
+    func send(_ actions: PersonFavoriteView.Actions) {
         switch actions {
         case .back: router.trigger(.back)
         }

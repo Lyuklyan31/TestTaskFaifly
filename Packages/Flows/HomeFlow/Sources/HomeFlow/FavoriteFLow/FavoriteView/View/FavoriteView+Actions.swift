@@ -12,5 +12,6 @@ extension FavoriteView {
     
     enum Actions {
         case deletePerson(PersonRealm)
+        case selectedPerson(PersonRealm)
     }
 }

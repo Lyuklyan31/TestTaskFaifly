@@ -36,6 +36,7 @@ struct ListView: View {
             LazyVStack {
                 ForEach(viewModel.state.listPeople, id: \.id.rawValue) { person in
                     cellView(person: person)
+                        .padding(.horizontal, 16.0)
                         .onAppear {
                             if person == viewModel.state.listPeople.last {
                                 viewModel.send(.loadPage)
@@ -43,6 +44,9 @@ struct ListView: View {
                         }
                 }
             }
+        }
+        .refreshable {
+            viewModel.send(.loadPage)
         }
     }
     
@@ -74,7 +78,6 @@ struct ListView: View {
                     set: { newValue in viewModel.send(.makeFavorite(person, newValue)) }
                 )
             )
-            .padding(.horizontal, 16.0)
         }
     }
 }

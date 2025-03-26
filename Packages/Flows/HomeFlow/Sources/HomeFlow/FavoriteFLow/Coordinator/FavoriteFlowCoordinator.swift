@@ -15,6 +15,7 @@ import SharedModels
 enum FavoriteFlowRoute: Route {
     case root
     case back
+    case personFavorite(FavoritePersonInputParameters)
 }
 
 final class FavoriteFlowCoordinator: NavigationCoordinator<FavoriteFlowRoute> {
@@ -26,8 +27,8 @@ final class FavoriteFlowCoordinator: NavigationCoordinator<FavoriteFlowRoute> {
     
     // MARK: - Inits
     
-    init(rootViewController: RootViewController) {
-        self.favoriteViewModel = FavoriteViewModel()
+    init(rootViewController: RootViewController, delegate: FavoriteViewModelDelegate) {
+        self.favoriteViewModel = FavoriteViewModel(delegate: delegate)
         let viewController = FavoriteView(viewModel: favoriteViewModel).hostable()
         rootPresentable = viewController
         
@@ -39,6 +40,27 @@ final class FavoriteFlowCoordinator: NavigationCoordinator<FavoriteFlowRoute> {
         switch route {
         case .root: return .set([rootPresentable])
         case .back: return .pop()
+        case .personFavorite:
+            let presentable = favoritePersonPresentable()
+            return .push(presentable)
         }
     }
+    
+    private func favoritePersonPresentable() -> Presentable {
+        let viewModel = PersonFavoriteViewModel(
+            router: weakRouter,
+            inputParameters: .init(
+                data: favoriteViewModel.state.person
+            )
+        )
+        let viewController = PersonFavoriteView(viewModel: viewModel).hostable()
+        viewController.hidesBottomBarWhenPushed = true
+        return viewController
+    }
+}
+
+// MARK: - InputParameters
+
+struct FavoritePersonInputParameters {
+    var data: PersonRealm
 }
